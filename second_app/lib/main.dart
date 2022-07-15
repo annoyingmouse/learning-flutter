@@ -1,44 +1,83 @@
 import 'package:flutter/material.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  void answerQuestion(int answer) {
-    print('Answer chosen $answer');
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  final List<Map<String, Object>> _questions = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': [
+        {'text': 'Rabbit', 'score': 3},
+        {'text': 'Snake', 'score': 11},
+        {'text': 'Elephant', 'score': 5},
+        {'text': 'Lion', 'score': 9},
+      ],
+    },
+    {
+      'questionText': 'Who\'s your favorite instructor?',
+      'answers': [
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+        {'text': 'Max', 'score': 1},
+      ],
+    },
+  ];
+  var _questionIndex = 0;
+
+  var _totalScore = 0;
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
+    if (_questionIndex < _questions.length - 1) {
+      print('We have more questions!');
+    } else {
+      print('We have no more questions!');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> questions = [
-      "What's your favourite colour",
-      "What's your favourite animal"
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('My Second Application'),
         ),
-        body: Column(
-          children: <Widget>[
-            // Text(questions[0]),
-            Text(questions.elementAt(0)),
-            ElevatedButton(
-              child: Text('Answer 1'),
-              onPressed: () => answerQuestion(1),
-            ),
-            ElevatedButton(
-              child: Text('Answer 2'),
-              onPressed: () {
-                // ...
-                print('Answer 2 chosen');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Answer 3'),
-              onPressed: () => print('Answer 3 chosen'),
-            ),
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questions: _questions,
+                questionIndex: _questionIndex,
+              )
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
