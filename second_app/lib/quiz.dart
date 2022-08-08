@@ -7,6 +7,7 @@ class Quiz extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final Function answerQuestion;
   final int questionIndex;
+
   Quiz({
     required this.answerQuestion,
     required this.questions,
