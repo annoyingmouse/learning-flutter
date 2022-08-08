@@ -15,9 +15,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final List<String> texts = const [
-    'Lorem ipsum dolor sit amet',
-    'consectetur adipiscing elit'
+  final List<String> _texts = const [
+    'This is the first assignment',
+    'This changed'
   ];
 
   var _textIndex = 0;
@@ -31,13 +31,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: const Text('My First Assignment'),
+            title: const Text('Assignment 1'),
           ),
-          body: App(text: texts[_textIndex] as String, pressHandler: swapText)),
+          body:
+              App(text: _texts[_textIndex] as String, pressHandler: swapText)),
     );
   }
 }

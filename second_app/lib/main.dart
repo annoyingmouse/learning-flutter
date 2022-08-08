@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    if (_questionIndex < _questions.length - 1) {
+    if (_questionIndex < _questions.length) {
       print('We have more questions!');
     } else {
       print('We have no more questions!');

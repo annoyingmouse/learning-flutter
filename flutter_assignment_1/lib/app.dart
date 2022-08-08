@@ -16,10 +16,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        TextControl(() => pressHandler()),
         DomText(
           text,
         ),
-        TextControl(() => pressHandler()),
       ],
     );
   }
