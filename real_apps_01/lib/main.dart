@@ -58,10 +58,32 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print(state);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
   final List<Transaction> _userTransactions = [
     Transaction(
-      id: 't1',
+      id: DateTime.now()
+          .subtract(
+            Duration(days: 1),
+          )
+          .toString(),
       title: 'New Shoes',
       amount: 69.99,
       date: DateTime.now().subtract(
@@ -69,7 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     Transaction(
-      id: 't2',
+      id: DateTime.now()
+          .subtract(
+            Duration(days: 2),
+          )
+          .toString(),
       title: 'Weekly Groceries',
       amount: 15.63,
       date: DateTime.now().subtract(
@@ -77,7 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     Transaction(
-      id: 't3',
+      id: DateTime.now()
+          .subtract(
+            Duration(days: 3),
+          )
+          .toString(),
       title: 'E-Liquid',
       amount: 49.99,
       date: DateTime.now().subtract(
@@ -85,7 +115,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     Transaction(
-      id: 't4',
+      id: DateTime.now()
+          .subtract(
+            Duration(days: 4),
+          )
+          .toString(),
       title: 'T-shirts',
       amount: 30,
       date: DateTime.now().subtract(
@@ -93,7 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     Transaction(
-      id: 't5',
+      id: DateTime.now()
+          .subtract(
+            Duration(days: 5),
+          )
+          .toString(),
       title: 'Dragon X8',
       amount: 210,
       date: DateTime.now().subtract(
@@ -101,7 +139,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
     Transaction(
-      id: 't6',
+      id: DateTime.now()
+          .subtract(
+            Duration(days: 6),
+          )
+          .toString(),
       title: 'Target',
       amount: 30,
       date: DateTime.now().subtract(

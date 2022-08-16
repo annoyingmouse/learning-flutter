@@ -34,9 +34,12 @@ class TransactionList extends StatelessWidget {
           })
         : ListView.builder(
             itemBuilder: (ctx, index) {
+              print('**********************************************');
+              print(transactions[index].id);
               return TransactionListItem(
-                transactions[index],
-                deleteTx,
+                key: ValueKey(transactions[index].id),
+                transaction: transactions[index],
+                deleteHandler: deleteTx,
               );
               // return Card(
               //   margin: const EdgeInsets.symmetric(
